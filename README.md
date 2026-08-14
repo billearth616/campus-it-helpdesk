@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Campus IT Helpdesk & Ticketing System
 
-## Getting Started
+CSCD602 Advanced Software Engineering — Capstone Project
 
-First, run the development server:
+## Project Overview
+A web application for reporting, triaging, and resolving campus IT support
+tickets. Students/staff submit issues; IT staff triage, assign, and resolve
+them; admins manage categories and user roles.
 
+## Main Features
+- Email/password authentication with role-based accounts (student, staff, admin)
+- Ticket submission with category and priority
+- Role-scoped ticket visibility (own tickets vs. all tickets) enforced by database Row Level Security
+- Status workflow (open → in progress → resolved → closed) and staff assignment
+- Per-ticket comment thread
+- Admin category management
+- Admin user-role management
+
+## Technology Stack
+- **Frontend/App layer:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4
+- **Backend:** Next.js Server Actions
+- **Database & Auth:** Supabase (Postgres + Auth + Row Level Security)
+- **Hosting:** Vercel
+
+## How to Access the Application
+See `Links.txt` (or the project's top-level documentation) for:
+- Live application URL
+- Test user credentials (student and staff)
+- Admin credentials
+- Source-code repository link
+
+## Local Development Setup
 ```bash
+npm install
+cp .env.local.example .env.local   # fill in your Supabase URL + anon key
+# Run app/supabase/schema.sql once against your Supabase project (SQL editor)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Known Limitations
+- No email notifications on ticket updates (planned — see Maintenance & Future Evolution doc).
+- No file attachments on tickets yet.
+- No automated end-to-end test suite; testing was manual and scenario-based given the project timeline (see Testing Report).
+- No SLA timers/escalation automation yet.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Special Instructions for Testing
+- Sign up creates a `student` or `staff` account directly; `admin` accounts must be promoted from an existing account via **Admin → Users** (see Links.txt for a pre-seeded admin login).
+- Categories are pre-seeded (Hardware, Software, Network, Account Access, Other) via `app/supabase/schema.sql`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgements
+Built with Next.js, React, Tailwind CSS, and Supabase — all used under their respective open-source/free-tier licenses.
