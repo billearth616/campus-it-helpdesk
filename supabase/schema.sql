@@ -128,6 +128,28 @@ create policy "Users can update own profile" on profiles
 create policy "Admin can update any profile" on profiles
   for update using (is_admin());
 
+-- Guard: RLS above lets a user UPDATE their own profile row (needed for
+-- e.g. changing their name), but nothing in that policy stops them setting
+-- role = 'admin' on themselves. This trigger closes that hole: any change
+-- to `role` must come from an admin (auth.uid() is null for direct/SQL
+-- editor/service-role access, which is trusted and left unrestricted so
+-- the first admin can be bootstrapped).
+create or replace function prevent_role_self_escalation()
+returns trigger as $$
+begin
+  if new.role is distinct from old.role
+     and auth.uid() is not null
+     and not is_admin() then
+    raise exception 'Only admins can change user roles';
+  end if;
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+create trigger profiles_prevent_role_escalation
+before update on profiles
+for each row execute function prevent_role_self_escalation();
+
 -- CATEGORIES policies
 create policy "Anyone authenticated can view categories" on categories
   for select using (auth.role() = 'authenticated');
