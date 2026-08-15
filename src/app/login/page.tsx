@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { signIn } from "@/app/auth/actions";
-import { TicketIcon, WarningIcon } from "@/components/icons";
+import { TicketIcon, WarningIcon, CheckCircleIcon } from "@/components/icons";
 
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; reset?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, reset } = await searchParams;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 bg-mesh px-4 py-12">
@@ -22,6 +22,12 @@ export default async function LoginPage({
           <h1 className="text-2xl font-bold text-slate-900 mb-1">Welcome back</h1>
           <p className="text-sm text-slate-500 mb-6">Sign in to Campus IT Helpdesk</p>
 
+          {reset && (
+            <div className="mb-5 flex items-start gap-2 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+              <CheckCircleIcon className="h-4 w-4 mt-0.5 shrink-0" />
+              <span>Password updated. Sign in with your new password.</span>
+            </div>
+          )}
           {error && (
             <div className="mb-5 flex items-start gap-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg p-3">
               <WarningIcon className="h-4 w-4 mt-0.5 shrink-0" />
@@ -42,7 +48,12 @@ export default async function LoginPage({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-sm font-medium text-slate-700">Password</label>
+                <Link href="/forgot-password" className="text-xs font-medium text-brand-700 hover:text-brand-800">
+                  Forgot password?
+                </Link>
+              </div>
               <input
                 name="password"
                 type="password"

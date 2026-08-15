@@ -215,6 +215,50 @@ export function SendIcon({ className }: IconProps) {
   );
 }
 
+export function GearIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth={base} />
+      <path
+        d="M12 3.5v2M12 18.5v2M20.5 12h-2M5.5 12h-2M17.66 6.34l-1.42 1.42M7.76 16.24l-1.42 1.42M17.66 17.66l-1.42-1.42M7.76 7.76 6.34 6.34"
+        stroke="currentColor"
+        strokeWidth={base}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function BarChartIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M5 20V10M12 20V4M19 20v-7" stroke="currentColor" strokeWidth={base} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function PaperclipIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M17.5 8.5 9.9 16.1a3 3 0 1 1-4.24-4.24l8.13-8.13a2 2 0 1 1 2.83 2.83l-7.78 7.78a1 1 0 1 1-1.41-1.41l6.72-6.72"
+        stroke="currentColor"
+        strokeWidth={base}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function DownloadIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M12 3v12M7 10l5 5 5-5M4.5 20h15" stroke="currentColor" strokeWidth={base} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function TrashIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">

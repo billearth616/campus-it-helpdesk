@@ -41,3 +41,15 @@ export interface Comment {
   created_at: string;
   author?: Profile | null;
 }
+
+export interface Attachment {
+  id: string;
+  ticket_id: string;
+  uploaded_by: string;
+  file_name: string;
+  storage_path: string;
+  file_size: number;
+  content_type: string | null;
+  created_at: string;
+  uploader?: Profile | null;
+}

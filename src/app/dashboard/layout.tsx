@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getProfile } from "@/lib/getProfile";
 import { signOut } from "@/app/auth/actions";
-import { TicketIcon, PlusIcon, TagIcon, UsersIcon, SignOutIcon } from "@/components/icons";
+import { TicketIcon, PlusIcon, TagIcon, UsersIcon, SignOutIcon, GearIcon, BarChartIcon } from "@/components/icons";
 
 export default async function DashboardLayout({
   children,
@@ -64,12 +64,22 @@ export default async function DashboardLayout({
                   <UsersIcon className="h-4 w-4" />
                   <span className="hidden md:inline">Users</span>
                 </Link>
+                <Link
+                  href="/dashboard/admin/analytics"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors font-medium"
+                >
+                  <BarChartIcon className="h-4 w-4" />
+                  <span className="hidden md:inline">Analytics</span>
+                </Link>
               </>
             )}
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden sm:flex items-center gap-2">
+            <Link
+              href="/dashboard/settings"
+              className="hidden sm:flex items-center gap-2 rounded-lg px-1.5 py-1 hover:bg-slate-100 transition-colors"
+            >
               <div className="h-8 w-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-semibold">
                 {initials}
               </div>
@@ -81,7 +91,14 @@ export default async function DashboardLayout({
                   {profile.role}
                 </span>
               </div>
-            </div>
+            </Link>
+            <Link
+              href="/dashboard/settings"
+              aria-label="Settings"
+              className="flex items-center justify-center h-9 w-9 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition-colors sm:hidden"
+            >
+              <GearIcon className="h-4.5 w-4.5" />
+            </Link>
             <form action={signOut}>
               <button
                 type="submit"

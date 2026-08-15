@@ -31,8 +31,17 @@ export async function updateSession(request: NextRequest) {
 
   const isAuthRoute =
     request.nextUrl.pathname.startsWith("/login") ||
-    request.nextUrl.pathname.startsWith("/signup");
-  const isPublicRoute = request.nextUrl.pathname === "/";
+    request.nextUrl.pathname.startsWith("/signup") ||
+    request.nextUrl.pathname.startsWith("/forgot-password");
+  // /reset-password and /auth/confirm must stay accessible regardless of
+  // auth state: clicking a recovery-email link briefly authenticates the
+  // user before they've set a new password, and isAuthRoute's "redirect
+  // logged-in users to /dashboard" rule would otherwise bounce them away
+  // from the very page they need.
+  const isPublicRoute =
+    request.nextUrl.pathname === "/" ||
+    request.nextUrl.pathname.startsWith("/reset-password") ||
+    request.nextUrl.pathname.startsWith("/auth/confirm");
 
   if (!user && !isAuthRoute && !isPublicRoute) {
     const url = request.nextUrl.clone();
