@@ -50,8 +50,8 @@ npm run dev
 
 ## Special Instructions for Testing
 - Sign up creates a `student` or `staff` account directly; `admin` accounts must be promoted from an existing account, or created directly, via **Admin → Users** (see Links.txt for a pre-seeded admin login).
-- Admin → Users → **Add User** creates an account of any role immediately (no email confirmation needed) and shows a one-time temporary password to hand to the new user. Requires `SUPABASE_SERVICE_ROLE_KEY` to be set.
-- File attachments require `app/supabase/add_attachments.sql` to have been run (see setup above); without it, uploads fail with a clear "Bucket not found" message rather than crashing.
+- Admin → Users → **Add User** creates an account of any role immediately (no email confirmation needed) and shows a one-time temporary password to hand to the new user.
+- File attachments (Images, PDFs, and common documents up to 10 MB) can be added to any ticket you can view, from its detail page.
 - Categories are pre-seeded (Hardware, Software, Network, Account Access, Other) via `app/supabase/schema.sql`.
 
 ## Acknowledgements
