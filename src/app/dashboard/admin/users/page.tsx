@@ -1,6 +1,7 @@
 import { getProfile } from "@/lib/getProfile";
 import { redirect } from "next/navigation";
 import { updateUserRole } from "./actions";
+import { CreateUserForm } from "./CreateUserForm";
 
 export default async function UsersAdminPage() {
   const { supabase, profile } = await getProfile();
@@ -20,6 +21,8 @@ export default async function UsersAdminPage() {
         <h1 className="text-2xl font-bold text-slate-900">Manage Users</h1>
         <p className="text-sm text-slate-500 mt-0.5">Promote staff and admins, or adjust roles.</p>
       </div>
+
+      <CreateUserForm />
 
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm divide-y divide-slate-100 overflow-hidden">
         {users?.map((u) => {

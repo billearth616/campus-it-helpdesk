@@ -15,6 +15,7 @@ them; admins manage categories and user roles.
 - Per-ticket comment thread
 - Admin category management
 - Admin user-role management
+- Admin can create new user accounts directly (any role), with an immediately-usable one-time temporary password
 
 ## Technology Stack
 - **Frontend/App layer:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4
@@ -32,7 +33,7 @@ See `Links.txt` (or the project's top-level documentation) for:
 ## Local Development Setup
 ```bash
 npm install
-cp .env.local.example .env.local   # fill in your Supabase URL + anon key
+cp .env.local.example .env.local   # fill in your Supabase URL, anon key, and service-role key
 # Run app/supabase/schema.sql once against your Supabase project (SQL editor)
 npm run dev
 ```
@@ -44,7 +45,8 @@ npm run dev
 - No SLA timers/escalation automation yet.
 
 ## Special Instructions for Testing
-- Sign up creates a `student` or `staff` account directly; `admin` accounts must be promoted from an existing account via **Admin → Users** (see Links.txt for a pre-seeded admin login).
+- Sign up creates a `student` or `staff` account directly; `admin` accounts must be promoted from an existing account, or created directly, via **Admin → Users** (see Links.txt for a pre-seeded admin login).
+- Admin → Users → **Add User** creates an account of any role immediately (no email confirmation needed) and shows a one-time temporary password to hand to the new user.
 - Categories are pre-seeded (Hardware, Software, Network, Account Access, Other) via `app/supabase/schema.sql`.
 
 ## Acknowledgements
